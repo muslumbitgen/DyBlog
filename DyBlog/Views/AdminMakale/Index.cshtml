@@ -10,7 +10,11 @@
 <p>
     @Html.ActionLink("Yeni Makale", "Create")
 </p>
-<table class="table">
+@if (TempData.Count > 0 && !String.IsNullOrEmpty(TempData["Message"].ToString()))
+{
+    @Html.Raw(TempData["Message"]);
+}
+<table class="table table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Kategori.KategoriAdi)
@@ -33,32 +37,43 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Baslik)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Icerik)
-        </td>
-        <td>
-          <img width="75" src="@item.Foto"/>
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tarih)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Okuma)
-        </td>
-        <td>
-            @Html.ActionLink("Güncelle", "Edit", new { id=item.MakaleId }) |
-            @Html.ActionLink("Detay", "Details", new { id=item.MakaleId }) |
-            @Html.ActionLink("Sil", "Delete", new { id=item.MakaleId })
-        </td>
-    </tr>
-}
+    @if (Model == null)
+    {
+        <tr>
+            <td colspan="3">Henüz Makale eklenmemiş</td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Kategori.KategoriAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Baslik)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Icerik)
+                </td>
+                <td>
+                    <img width="75" src="@item.Foto" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tarih)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Okuma)
+                </td>
+                <td>
+                    @Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId }) |
+                     @Html.ActionLink("Sil", "Delete", new { id = item.MakaleId })
+                </td>
+           
+            </tr>
+        }
+
+    }
 
 </table>

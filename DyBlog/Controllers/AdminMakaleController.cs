@@ -76,45 +76,96 @@ namespace DyBlog.Controllers
         // GET: AdminMakale/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+
+            var makale = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
+            if (makale==null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.KategoriId = new SelectList(db.Kategoris, "KategoriId", "KategoriAdi",makale.KategoriId);
+            return View(makale);
         }
 
         // POST: AdminMakale/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, Makale makale, HttpPostedFileBase Foto)
         {
             try
             {
-                // TODO: Add update logic here
+                var makales = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
+                if (Foto!=null)
+                {
+                    if (System.IO.File.Exists(Server.MapPath(makales.Foto)))
+                    {
+                        System.IO.File.Delete(Server.MapPath(makales.Foto));
+                    }
+                    WebImage img = new WebImage(Foto.InputStream);
+                    FileInfo fotoinfo = new FileInfo(Foto.FileName);
 
+                    string newfoto = Guid.NewGuid().ToString() + fotoinfo.Extension;
+                    img.Resize(800, 350);
+                    img.Save("~/Uploads/MakaleFoto/" + newfoto);
+                    makales.Foto = "/Uploads/MakaleFoto/" + newfoto;
+                
+                }
+                makales.Baslik = makale.Baslik;
+                makales.Icerik = makale.Icerik;
+                makales.KategoriId = makale.KategoriId;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                ViewBag.KategoriId = new SelectList(db.Kategoris, "KategoriId", "KategoriAdi", makale.KategoriId);
+                return View(makale);
             }
         }
-
-        // GET: AdminMakale/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var makale = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
+            if (makale==null)
+            {
+                return HttpNotFound();
+            }
+            return View(makale);
         }
-
         // POST: AdminMakale/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
+                var makales = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
 
+                if (makales == null)
+                {
+                    return HttpNotFound();
+                }
+                if (System.IO.File.Exists(Server.MapPath(makales.Foto)))
+                {
+                    System.IO.File.Delete(Server.MapPath(makales.Foto));
+                }
+                foreach (var i in makales.Yorums.ToList())
+                {
+                    db.Yorums.Remove(i);
+                }
+                foreach (var i in makales.Etikets.ToList())
+                {
+                    db.Etikets.Remove(i);
+                }
+                db.Makales.Remove(makales);
+                db.SaveChanges();
                 return RedirectToAction("Index");
+
+
             }
             catch
             {
+               
                 return View();
             }
         }
+
+    
     }
 }
