@@ -162,9 +162,11 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminKategoriController.cs" />
     <Compile Include="Controllers\AdminMakaleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartialsController.cs" />
+    <Compile Include="Controllers\UyeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -190,6 +192,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\AdminKategori\Create.cshtml" />
+    <Content Include="Views\AdminKategori\Delete.cshtml" />
+    <Content Include="Views\AdminKategori\Details.cshtml" />
+    <Content Include="Views\AdminKategori\Edit.cshtml" />
+    <Content Include="Views\AdminKategori\Index.cshtml" />
+    <Content Include="Views\Uye\Create.cshtml" />
+    <Content Include="Views\Uye\Login.cshtml" />
+    <Content Include="Views\Uye\Index.cshtml" />
+    <Content Include="Views\Uye\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -200,6 +211,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Uploads\MakaleFoto\" />
+    <Folder Include="Uploads\UyeFoto\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

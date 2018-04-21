@@ -28,17 +28,38 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Hakkimizda">Hakkımızda</a>
+                        <a class="nav-link" href="/Home/Hakkimizda/">Hakkımızda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Galeri">Galeri</a>
+                        <a class="nav-link" href="/Home/Galeri/">Galeri</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Kategoriler">Kategoriler</a>
+                        <a class="nav-link" href="/Home/Kategoriler/">Kategoriler</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/Home/Iletisim">İletişim</a>
+                        <a class="nav-link" href="/Home/Iletisim/">İletişim</a>
                     </li>
+                    @if (Session["uyeid"] != null)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Uye/Index/@Session["uyeid"]">@Session["kullaniciAdi"].ToString()</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Uye/Logout/">Çıkış</a>
+                        </li>
+                        if (Convert.ToInt32(Session["YetkiId"]) == 1)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Admin/Index/">Admin Panali</a>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Uye/Login/">Giriş Yap</a>
+                        </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -67,7 +88,7 @@
                 </div>
                 <!-- Categories Widget -->
                 @{Html.RenderAction("Kategori", "Partials");}
-                
+
                 <!-- Side Widget -->
                 <div class="card my-4">
                     <h5 class="card-header">Side Widget</h5>
