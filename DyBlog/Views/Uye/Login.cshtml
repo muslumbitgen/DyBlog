@@ -5,24 +5,38 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Üye Giriş</h2>
-
-    <div class="form-horizontal">
-        <hr />
-        <form action="/Uye/Login" method="post" class="form-signin">
-            <div class="form-group">
-                <input type="text" class="form-control" name="kullaniciAdi" placeholder="Kullanıcı adı" required autofocus />
-            </div>
-
-            <div class="form-group">
-                <input type="password" class="form-control" name="sifre" placeholder="Şifre" required />
-            </div>
-
-            <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Giriş yap</button>
-        </form>
-     
+<main class="with-aside">
+    <header class="page-header">
+        <h2 class="page-title">
+            Üye Girişi
+        </h2>
+    </header>
+    <div class="content-area">
+        <!-- form elements -->
+        <div role="form" class="contact-form" id="contact-form" dir="ltr" lang="tr-TR">
+            <form action="/Uye/Login" method="post" class="contact-form">
+                <p class="">
+                    <label>
+                        <span class="form-control-wrap">
+                            <input type="text" class="form-control text" name="kullaniciAdi" placeholder="Kullanıcı adı" required autofocus />
+                        </span>
+                    </label>
+                </p>
+                <p class="">
+                    <label>
+                        <br>
+                        <span class="form-control-wrap your-email">
+                            <input type="password" class="form-control text" name="sifre" placeholder="Şifre" required />
+                        </span>
+                    </label>
+                </p>
+                <p>
+                    <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit">Giriş yap</button>
+                </p>
+            </form>
+        </div>
     </div>
+</main>
 @if (TempData.Count > 0 && !String.IsNullOrEmpty(TempData["Message"].ToString()))
 {
     @Html.Raw(TempData["Message"]);

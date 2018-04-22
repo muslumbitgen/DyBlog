@@ -15,5 +15,14 @@ namespace DyBlog.Controllers
         {
             return View(db.Kategoris.ToList());
         }
+        public ActionResult PopulerMakaleler()
+        {
+
+            return View(db.Makales.OrderByDescending(m => m.Okuma).Take(3));
+        }
+        public ActionResult SonGonderi()
+        {
+            return View(db.Makales.OrderByDescending(m => m.MakaleId).ToList().Take(3));
+        }
     }
 }

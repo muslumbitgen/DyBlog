@@ -25,6 +25,8 @@ C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.AI.WindowsServer.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.ApplicationInsights.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\PagedList.dll
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\PagedList.Mvc.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Helpers.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Mvc.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Razor.dll
@@ -39,12 +41,15 @@ C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.AI.Web.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.ApplicationInsights.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\PagedList.xml
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\PagedList.Mvc.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Razor.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Webpages.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Webpages.Deployment.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Webpages.Razor.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Helpers.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\System.Web.Mvc.xml
-C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.csprojResolveAssemblyReference.cache
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.pdb
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\GridMvc.dll
+C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.csprojResolveAssemblyReference.cache
