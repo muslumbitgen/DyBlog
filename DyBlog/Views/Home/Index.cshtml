@@ -30,7 +30,7 @@
                 <span class="screen-reader-text">
                     Posted in
                 </span>
-                <a href="category.html" rel="bookmark">
+                <a href="/Home/KategoriMakale/@item.Kategori.KategoriId" rel="bookmark">
                     @item.Kategori.KategoriAdi
                 </a>
                 <i class="fa fa-tags"> @item.Etikets.Count()
@@ -53,7 +53,7 @@
                     <time class="entry-date published">
                         @string.Format("{0: MMMM yyyy}",item.Tarih),
                     </time> by
-                    <a href="/Uye/Index/@item.Uye.UyeId">
+                    <a href="/Uye/UyeProfil/@item.Uye.UyeId">
                        @item.Uye.AdSoyad
                     </a>
                 </p>

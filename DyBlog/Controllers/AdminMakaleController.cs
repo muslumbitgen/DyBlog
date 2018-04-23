@@ -6,6 +6,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using System.Web;
+using System.Web.Mvc;
+using PagedList;
 
 namespace DyBlog.Controllers
 {
@@ -13,9 +16,9 @@ namespace DyBlog.Controllers
     {
         DyBlogDB db = new DyBlogDB();
         // GET: AdminMakale
-        public ActionResult Index()
+        public ActionResult Index(int page = 1)
         {
-            var makales = db.Makales.ToList();
+            var makales = db.Makales.OrderByDescending(m => m.MakaleId).ToPagedList(page, 5);
             return View(makales);
         }
 
@@ -60,7 +63,9 @@ namespace DyBlog.Controllers
                         makale.Etikets.Add(yeniEtiket);
                     }
                 }
-
+                makale.UyeId = Convert.ToInt32(Session["uyeid"]);
+                makale.Okuma = 1;
+                makale.Tarih=DateTime.Now;
                 db.Makales.Add(makale);
                 db.SaveChanges();
 
@@ -120,52 +125,56 @@ namespace DyBlog.Controllers
                 return View(makale);
             }
         }
+     
+        // POST: AdminMakale/Delete/5
         public ActionResult Delete(int id)
         {
-            var makale = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
-            if (makale==null)
+            Makale item = db.Makales.Where(x => x.MakaleId == id).FirstOrDefault();
+            if (item != null)
             {
-                return HttpNotFound();
-            }
-            return View(makale);
-        }
-        // POST: AdminMakale/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                var makales = db.Makales.Where(x => x.MakaleId == id).SingleOrDefault();
-
-                if (makales == null)
+                if (item == null)
                 {
                     return HttpNotFound();
                 }
-                if (System.IO.File.Exists(Server.MapPath(makales.Foto)))
+                if (System.IO.File.Exists(Server.MapPath(item.Foto)))
                 {
-                    System.IO.File.Delete(Server.MapPath(makales.Foto));
+                    System.IO.File.Delete(Server.MapPath(item.Foto));
                 }
-                foreach (var i in makales.Yorums.ToList())
+               
+                foreach (var i in item.Yorums.ToList())
                 {
                     db.Yorums.Remove(i);
                 }
-                foreach (var i in makales.Etikets.ToList())
+                foreach (var i in item.Etikets.ToList())
                 {
                     db.Etikets.Remove(i);
                 }
-                db.Makales.Remove(makales);
+                db.Makales.Remove(item);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-
-
+                TempData["Message"] = Alert("Makale silindi", true);
             }
-            catch
+            else
             {
-               
-                return View();
+                TempData["Message"] = Alert("Hata oluştu! Makale silinemedi.", false);
             }
+            return RedirectToAction("Index","AdminMakale");
+            
+            
         }
 
-    
+        public string Alert(string message, bool? type = null)
+        {
+            string tip;
+            switch (type)
+            {
+                case false: tip = "danger"; break;
+                case true: tip = "success"; break;
+                default:
+                    tip = "info";
+                    break;
+            }
+            string msg = "<div class='alert alert-" + tip + " alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>" + message + "</div>";
+            return msg;
+        }
     }
 }

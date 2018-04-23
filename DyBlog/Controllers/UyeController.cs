@@ -40,8 +40,6 @@ namespace DyBlog.Controllers
                 Session["kullaniciAdi"] = user.KullaniciAdi;
                 Session["uyeid"] = user.UyeId;
                 Session["YetkiId"] = user.YetkiId;
-                TempData["Message"] = Alert("Giriş Başarılı", true);
-
                 return RedirectToAction("Index", "Home");
             }
             TempData["Message"] = Alert("Hatalı giriş yaptınız. Lütfen Kullanıcı Adı veya Şifrenizi Kontrol Ediniz!", false);
@@ -126,6 +124,12 @@ namespace DyBlog.Controllers
                 return RedirectToAction("Index","Home",new { id=uyes.UyeId});
             }
             return View();
+        }
+
+        public ActionResult UyeProfil(int id)
+        {
+            var uye = db.Uyes.Where(u => u.UyeId == id).SingleOrDefault();
+            return View(uye);
         }
         public string Alert(string message, bool? type = null)
         {

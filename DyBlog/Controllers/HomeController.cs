@@ -35,15 +35,21 @@ namespace DyBlog.Controllers
 
             return View(makales);
         }
+        public ActionResult KategoriMakale(int id)
+        {
+            var katego = db.Makales.Where(m => m.Kategori.KategoriId == id).ToList();
+            if (katego == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(katego);
+        }
         public ActionResult Hakkimizda()
         {
             return View();
         }
         public ActionResult Galeri()
-        {
-            return View();
-        }
-        public ActionResult Kategoriler()
         {
             return View();
         }
@@ -55,7 +61,7 @@ namespace DyBlog.Controllers
         public JsonResult YorumYap(string yorum,int makaleId)
         {
             var uyeid = Session["uyeid"];
-            if (yorum!=null)
+            if (yorum==null)
             {
                 return Json(true, JsonRequestBehavior.AllowGet);
 

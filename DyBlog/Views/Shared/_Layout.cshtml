@@ -19,8 +19,8 @@
     <link rel="stylesheet" href="~/Content/css/style.css">
 
     <script src="~/Content/js/jquery.min.js">
-
     </script>
+
 
 </head>
 <body>
@@ -112,30 +112,17 @@
             </li>
 
         </ul>
-
+      
         <!--Kategoriler Bitis-->
         <!--Menudeki Sosyal Aglar Baslangic-->
         <div class="widget widget_social">
-            <a href="#">
-                <i class="fa fa-twitter">
-                </i>
-            </a>
-            <a href="#">
-                <i class="fa fa-facebook">
-                </i>
-            </a>
-            <a href="#">
-                <i class="fa fa-pinterest">
-                </i>
-            </a>
-            <a href="#">
-                <i class="fa fa-youtube">
-                </i>
-            </a>
-            <a href="#">
-                <i class="fa fa-instagram">
-                </i>
-            </a>
+            @*@foreach (DyBlog.Models.SosyalMedya soc in ViewBag.Socials)
+            {
+                <a href="@soc.UrlAdres">
+                    <i class="fa fa-@soc._class" title="@soc.Adi" target="_blank">
+                    </i>
+                </a>
+            }*@           
         </div>
         <!--Menudeki Sosyal Aglar Bitis-->
         <!--Hakkimizda Baslangic-->

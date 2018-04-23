@@ -19,7 +19,7 @@
                 <time class="entry-date published">
                     @string.Format("{0: MMMM yyyy}", Model.Tarih),
                 </time> TARİHİNDE
-                <a href="#">
+                <a href="/Uye/UyeProfil/@Model.Uye.UyeId">
                     @Model.Uye.AdSoyad
                 </a> TARAFINDAN
                 <a href="#">
@@ -111,7 +111,7 @@
                 </div>
                 <div class="comment-content">
                     <h4 class="comment-author">
-                        @item.Uye.AdSoyad
+                    <a href="/Uye/UyeProfil/@item.Uye.UyeId">   @item.Uye.AdSoyad </a>
                     </h4>
                     <span class="comment-meta">
                         <time class="entry-date published">
@@ -147,17 +147,17 @@
                     YORUM YAZIN
 
                 </h3>
-                <form class="comment-form" novalidate="">
+                <form class="comment-form">
 
                     <p class="comment-form-comment">
                         <label for="comment">
                             yorumunuz
                         </label>
-                        <textarea id="yorum" typeof="text" name="comment" cols="45" rows="5" required="required"></textarea>
+                        <textarea id="yorum" typeof="text"   rows="5" ></textarea>
                     </p>
 
                     <p class="form-submit">
-                        <input name="submit" id="gonder" class="submit" value="Yorum Yap" type="submit">
+                        <input type="submit" id="gonder" class="submit" value="Yorum Yap">
                     </p>
                 </form>
             </div>
@@ -185,7 +185,7 @@
                 var yorumunuz = $("#yorum").val();
                 $.ajax({
                     url: '/Home/YorumYap/',
-                    data:{yorum:yorumunuz,makaleId:@Model.MakaleId},
+                    data:{yorum:yorumunuz, makaleId:@Model.MakaleId},
                     type:'POST',
                     dataType:'json'
                 });
