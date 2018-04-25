@@ -70,25 +70,24 @@
                     @Html.DisplayFor(modelItem => item.Okuma)
                 </td>
                 <td>
-                    @Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId}) 
-                   @Html.ActionLink("Sil", "Delete", new { id = item.MakaleId }, new { onclick = "return confirm('Sosyal hesap silinecek. Emin misin?');" })
+                    @Html.ActionLink("Düzenle", "Edit", new { id = item.MakaleId })
+                    @Html.ActionLink("Sil", "Delete", new { id = item.MakaleId }, new { onclick = "return confirm('Sosyal hesap silinecek. Emin misin?');" })
                 </td>
-           
+
             </tr>
         }
 
     }
 
 </table>
-<div class="row">
-    <div class="col-md-8 text-center">
-        <div class="pagedList pagination-lg">
+<div class="col-sm-12 col-md-7">
+    <div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate">
+        <ul class="pagination">
             @Html.PagedListPager(Model, Page => Url.Action("Index", new { Page }), PagedListRenderOptions.Classic)
-
-
-        </div>
+        </ul>
     </div>
 </div>
+
 <style>
     #muslumTable {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -115,7 +114,7 @@
             text-align: left;
             background-color: #00b9bf;
             color: white;
-            width:auto;
+            width: auto;
         }
 
     img {

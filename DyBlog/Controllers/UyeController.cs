@@ -28,8 +28,9 @@ namespace DyBlog.Controllers
             return View();
         }
         [HttpPost, AllowAnonymous]
-        public ActionResult Login(FormCollection form)
+        public ActionResult Login(FormCollection form,string sifre)
         {
+            var md5pass = Crypto.Hash(sifre, "MD5");
             string username = form["kullaniciAdi"].ToString();
             string password = form["sifre"].ToString();
             Uye user = db.Uyes.Where(x => x.KullaniciAdi == username && x.Sifre == password).FirstOrDefault();
@@ -58,8 +59,9 @@ namespace DyBlog.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Uye uye,HttpPostedFileBase Foto)
+        public ActionResult Create(Uye uye,string Sifre,HttpPostedFileBase Foto)
         {
+            var md5pass = Sifre;
             if (ModelState.IsValid)
             {
                 if (Foto != null)
@@ -72,6 +74,7 @@ namespace DyBlog.Controllers
                     img.Save("~/Uploads/UyeFoto/" + newfoto);
                     uye.Foto = "/Uploads/UyeFoto/" + newfoto;
                     uye.YetkiId = 2;
+                    uye.Sifre = Crypto.Hash(md5pass,"MD5");
                     db.Uyes.Add(uye);
                     db.SaveChanges();
                     Session["uyeid"] = uye.UyeId;
@@ -96,10 +99,12 @@ namespace DyBlog.Controllers
             return View(uye);
         }
         [HttpPost]
-        public ActionResult Edit(Uye uye,int id,HttpPostedFileBase Foto)
+        public ActionResult Edit(Uye uye,string Sifre,int id,HttpPostedFileBase Foto)
         {
             if (ModelState.IsValid)
             {
+                var md5pass = Sifre;
+
                 var uyes = db.Uyes.Where(u => u.UyeId == id).SingleOrDefault();
                 if (Foto!=null)
                 {
@@ -118,7 +123,7 @@ namespace DyBlog.Controllers
                 uyes.AdSoyad = uye.AdSoyad;
                 uyes.Email = uye.Email;
                 uyes.KullaniciAdi = uye.KullaniciAdi;
-                uyes.Sifre = uye.Sifre;
+                uyes.Sifre =Crypto.Hash(md5pass, "MD5");
                 db.SaveChanges();
                 Session["kullaniciAdi"] = uye.KullaniciAdi;
                 return RedirectToAction("Index","Home",new { id=uyes.UyeId});

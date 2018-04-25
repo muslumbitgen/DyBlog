@@ -24,7 +24,7 @@ namespace DyBlog.Models
         [StringLength(50)]
         public string Email { get; set; }
 
-        [StringLength(50)]
+        [StringLength(200)]
         public string Sifre { get; set; }
 
         [StringLength(50)]

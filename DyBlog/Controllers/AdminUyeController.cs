@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DyBlog.Models;
+using System.Web.Helpers;
 
 namespace DyBlog.Controllers
 {
@@ -48,10 +49,12 @@ namespace DyBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye)
+        public ActionResult Create([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye,string Sifre)
         {
+            var md5pass = Sifre;
             if (ModelState.IsValid)
             {
+                uye.Sifre = Crypto.Hash(md5pass, "MD5");
                 db.Uyes.Add(uye);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -82,10 +85,12 @@ namespace DyBlog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye)
+        public ActionResult Edit([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye, string Sifre)
         {
             if (ModelState.IsValid)
             {
+                var md5pass = Sifre;
+                uye.Sifre = Crypto.Hash(md5pass, "MD5");
                 db.Entry(uye).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
