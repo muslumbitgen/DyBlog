@@ -14,9 +14,9 @@
     <div class="box-body">
 
         <div class="form-group">
-            @Html.LabelFor(model => model._class)
-            @Html.DropDownListFor(model => model._class, (SelectList)ViewBag.sosyal, new { @class = "form-control" })
-            @Html.ValidationMessageFor(model => model._class)
+            @Html.LabelFor(model => model.sosClass)
+            @Html.DropDownListFor(model => model.sosClass, (SelectList)ViewBag.Socials, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.sosClass)
         </div>
 
         <div class="form-group">

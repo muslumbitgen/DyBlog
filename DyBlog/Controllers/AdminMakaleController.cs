@@ -53,6 +53,10 @@ namespace DyBlog.Controllers
                 
 
                 }
+                else
+                {
+                    makale.Foto = "/Uploads/MakaleFoto/default.jpg";
+                }
                 if (etiketler != null)
                 {
                     string[] etiketDizi = etiketler.Split(',');

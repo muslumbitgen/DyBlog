@@ -6,7 +6,10 @@
 }
 
 <h2>Kategori</h2>
-
+@if (TempData.Count > 0 && !String.IsNullOrEmpty(TempData["Message"].ToString()))
+{
+    @Html.Raw(TempData["Message"]);
+}
 <p>
     @Html.ActionLink("Yeni Kategori Oluştur", "Create")
 </p>
@@ -25,8 +28,9 @@
         </td>
         <td>
             @Html.ActionLink("Düzenle", "Edit", new { id=item.KategoriId }) |
-            @Html.ActionLink("Detay", "Details", new { id=item.KategoriId }) |
-            @Html.ActionLink("Sil", "Delete", new { id=item.KategoriId })
+            @Html.ActionLink("Sil", "Delete", new { id = item.KategoriId }, new { onclick = "return confirm('Kategori silinecek. Emin misin?');" })
+
+
         </td>
     </tr>
 }

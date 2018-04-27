@@ -57,4 +57,3 @@ C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\WebMatrix.Data.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\bin\WebMatrix.WebData.xml
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.dll
 C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.pdb
-C:\Users\Muslum BITGEN\Desktop\DyBlog\DyBlog\obj\Debug\DyBlog.csprojResolveAssemblyReference.cache

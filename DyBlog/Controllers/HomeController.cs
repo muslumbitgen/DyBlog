@@ -12,10 +12,12 @@ namespace DyBlog.Controllers
     public class HomeController : Controller
     {
         DyBlogDB db = new DyBlogDB();
+
         // GET: Home
         public ActionResult Index(int page=1)
         {
-            var makale = db.Makales.OrderByDescending(m => m.MakaleId).ToPagedList(page,5);
+          var makale = db.Makales.OrderByDescending(m => m.MakaleId).ToPagedList(page,5);
+          
             return View(makale);
         }
 
@@ -38,6 +40,7 @@ namespace DyBlog.Controllers
         public ActionResult KategoriMakale(int id)
         {
             var katego = db.Makales.Where(m => m.Kategori.KategoriId == id).ToList();
+           
             if (katego == null)
             {
                 return HttpNotFound();
@@ -45,6 +48,7 @@ namespace DyBlog.Controllers
 
             return View(katego);
         }
+     
         public ActionResult Hakkimizda()
         {
             return View();

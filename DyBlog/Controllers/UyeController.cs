@@ -16,6 +16,7 @@ namespace DyBlog.Controllers
         DyBlogDB db = new DyBlogDB();
         public ActionResult Index(int id)
         {
+     
             var uye = db.Uyes.Where(u => u.UyeId == id).SingleOrDefault();
             if (Convert.ToInt32(Session["uyeid"])!=uye.UyeId)
             {
@@ -25,22 +26,23 @@ namespace DyBlog.Controllers
         }
         public ActionResult Login()
         {
+        
             return View();
         }
-        [HttpPost, AllowAnonymous]
-        public ActionResult Login(FormCollection form,string sifre)
+        [HttpPost]
+        public ActionResult Login(Uye uye,string Sifre)
         {
-            var md5pass = Crypto.Hash(sifre, "MD5");
-            string username = form["kullaniciAdi"].ToString();
-            string password = form["sifre"].ToString();
-            Uye user = db.Uyes.Where(x => x.KullaniciAdi == username && x.Sifre == password).FirstOrDefault();
-            if (user != null)
+
+            var md5pass = Crypto.Hash(Sifre, "MD5");
+                
+            var login = db.Uyes.Where(u => u.KullaniciAdi == uye.KullaniciAdi).SingleOrDefault();
+            if (login.KullaniciAdi==uye.KullaniciAdi && login.Sifre==md5pass)
             {
-                FormsAuthentication.SetAuthCookie(user.KullaniciAdi, false);
-                Session["AdSoyad"] = user.AdSoyad;
-                Session["kullaniciAdi"] = user.KullaniciAdi;
-                Session["uyeid"] = user.UyeId;
-                Session["YetkiId"] = user.YetkiId;
+               
+                Session["AdSoyad"] = login.AdSoyad;
+                Session["kullaniciAdi"] = login.KullaniciAdi;
+                Session["uyeid"] = login.UyeId;
+                Session["YetkiId"] = login.YetkiId;
                 return RedirectToAction("Index", "Home");
             }
             TempData["Message"] = Alert("Hatalı giriş yaptınız. Lütfen Kullanıcı Adı veya Şifrenizi Kontrol Ediniz!", false);
@@ -49,7 +51,7 @@ namespace DyBlog.Controllers
        
         public ActionResult Logout()
         {
-            FormsAuthentication.SignOut();
+            
             Session["uyeid"] = null;
             Session.Abandon();
             return RedirectToAction("Index", "Home");

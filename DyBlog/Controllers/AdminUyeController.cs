@@ -100,30 +100,41 @@ namespace DyBlog.Controllers
         }
 
         // GET: AdminUye/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            Uye item = db.Uyes.Where(x => x.UyeId == id).FirstOrDefault();
+            if (item != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (item == null)
+                {
+                    return HttpNotFound();
+                }
+                if (System.IO.File.Exists(Server.MapPath(item.Foto)))
+                {
+                    System.IO.File.Delete(Server.MapPath(item.Foto));
+                }
+                foreach (var i in item.Yorums.ToList())
+                {
+                    db.Yorums.Remove(i);
+                }
+                foreach (var i in item.Makales.ToList())
+                {
+                    db.Makales.Remove(i);
+                }
+
+                db.Uyes.Remove(item);
+                db.SaveChanges();
+                TempData["Message"] = Alert("Üye silindi", true);
             }
-            Uye uye = db.Uyes.Find(id);
-            if (uye == null)
+            else
             {
-                return HttpNotFound();
+                TempData["Message"] = Alert("Hata oluştu! Üye silinemedi.", false);
             }
-            return View(uye);
+            return RedirectToAction("Index", "AdminUye");
+
+
         }
 
-        // POST: AdminUye/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Uye uye = db.Uyes.Find(id);
-            db.Uyes.Remove(uye);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -132,6 +143,20 @@ namespace DyBlog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public string Alert(string message, bool? type = null)
+        {
+            string tip;
+            switch (type)
+            {
+                case false: tip = "danger"; break;
+                case true: tip = "success"; break;
+                default:
+                    tip = "info";
+                    break;
+            }
+            string msg = "<div class='alert alert-" + tip + " alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>" + message + "</div>";
+            return msg;
         }
     }
 }

@@ -59,8 +59,9 @@
         </td>
         <td>
             @Html.ActionLink("Düzenle", "Edit", new { id=item.UyeId }) |
-            @Html.ActionLink("Detay", "Details", new { id=item.UyeId }) |
-            @Html.ActionLink("Sil", "Delete", new { id = item.UyeId })
+            @Html.ActionLink("Sil", "Delete", new { id = item.UyeId }, new { onclick = "return confirm('Üye silinecek. Emin misin?');" })
+
+
         </td>
     </tr>
 }

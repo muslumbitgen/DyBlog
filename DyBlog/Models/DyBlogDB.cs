@@ -26,6 +26,10 @@ namespace DyBlog.Models
                 .HasMany(e => e.Makales)
                 .WithMany(e => e.Etikets)
                 .Map(m => m.ToTable("MakaleEtiket").MapLeftKey("EtiketId").MapRightKey("MakaleId"));
+
+            modelBuilder.Entity<Uye>()
+                .Property(e => e.Sifre)
+                .IsUnicode(false);
         }
     }
 }

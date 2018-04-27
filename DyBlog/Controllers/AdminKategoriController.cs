@@ -19,22 +19,6 @@ namespace DyBlog.Controllers
         {
             return View(db.Kategoris.ToList());
         }
-
-        // GET: AdminKategori/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Kategori kategori = db.Kategoris.Find(id);
-            if (kategori == null)
-            {
-                return HttpNotFound();
-            }
-            return View(kategori);
-        }
-
         // GET: AdminKategori/Create
         public ActionResult Create()
         {
@@ -90,30 +74,35 @@ namespace DyBlog.Controllers
         }
 
         // GET: AdminKategori/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            if (id == null)
+            Kategori item = db.Kategoris.Where(x => x.KategoriId == id).FirstOrDefault();
+            if (item != null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                if (item == null)
+                {
+                    return HttpNotFound();
+                }
+                
+
+                foreach (var i in item.Makales.ToList())
+                {
+                    db.Makales.Remove(i);
+                }
+               
+                db.Kategoris.Remove(item);
+                db.SaveChanges();
+                TempData["Message"] = Alert("Kategori silindi", true);
             }
-            Kategori kategori = db.Kategoris.Find(id);
-            if (kategori == null)
+            else
             {
-                return HttpNotFound();
+                TempData["Message"] = Alert("Hata oluştu! Kategori silinemedi.", false);
             }
-            return View(kategori);
+            return RedirectToAction("Index", "AdminKategori");
+
+
         }
 
-        // POST: AdminKategori/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Kategori kategori = db.Kategoris.Find(id);
-            db.Kategoris.Remove(kategori);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
@@ -122,6 +111,20 @@ namespace DyBlog.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        public string Alert(string message, bool? type = null)
+        {
+            string tip;
+            switch (type)
+            {
+                case false: tip = "danger"; break;
+                case true: tip = "success"; break;
+                default:
+                    tip = "info";
+                    break;
+            }
+            string msg = "<div class='alert alert-" + tip + " alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>" + message + "</div>";
+            return msg;
         }
     }
 }

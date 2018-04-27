@@ -24,5 +24,13 @@ namespace DyBlog.Controllers
         {
             return View(db.Makales.OrderByDescending(m => m.MakaleId).ToList().Take(3));
         }
+        public ActionResult KategoriList()
+        {
+            return View(db.Kategoris.ToList());
+        }
+        public ActionResult SosyalMedya()
+        {
+            return View(db.SosyalMedyas.ToList());
+        }
     }
 }

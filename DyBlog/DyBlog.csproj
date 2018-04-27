@@ -182,6 +182,7 @@
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="packages.config" />
+    <Content Include="App_Code\Twitter.cshtml" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
@@ -489,12 +490,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\AdminKategori\Create.cshtml" />
-    <Content Include="Views\AdminKategori\Delete.cshtml" />
-    <Content Include="Views\AdminKategori\Details.cshtml" />
     <Content Include="Views\AdminKategori\Edit.cshtml" />
     <Content Include="Views\AdminKategori\Index.cshtml" />
     <Content Include="Views\Uye\Create.cshtml" />
-    <Content Include="Views\Uye\Login.cshtml" />
     <Content Include="Views\Uye\Index.cshtml" />
     <Content Include="Views\Uye\Edit.cshtml" />
     <Content Include="Views\Shared\BlogAraPartials.cshtml" />
@@ -512,13 +510,14 @@
     <Content Include="Views\AdminYorum\Edit.cshtml" />
     <Content Include="Views\AdminYorum\Index.cshtml" />
     <Content Include="Views\AdminUye\Create.cshtml" />
-    <Content Include="Views\AdminUye\Delete.cshtml" />
-    <Content Include="Views\AdminUye\Details.cshtml" />
     <Content Include="Views\AdminUye\Edit.cshtml" />
     <Content Include="Views\AdminUye\Index.cshtml" />
     <Content Include="Views\Sosyal\CreateSocial.cshtml" />
     <Content Include="Views\Sosyal\EditSocial.cshtml" />
     <Content Include="Views\Sosyal\Socials.cshtml" />
+    <Content Include="Views\Uye\Login.cshtml" />
+    <Content Include="Views\Partials\KategoriList.cshtml" />
+    <Content Include="Views\Partials\SosyalMedya.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -18,8 +18,7 @@ namespace DyBlog.Models
         [StringLength(250)]
         public string UrlAdres { get; set; }
 
-        [Column("class")]
         [StringLength(50)]
-        public string _class { get; set; }
+        public string sosClass { get; set; }
     }
 }
