@@ -13,6 +13,8 @@ namespace DyBlog.Models
         }
 
         public virtual DbSet<Etiket> Etikets { get; set; }
+        public virtual DbSet<GeriBildirim> GeriBildirims { get; set; }
+        public virtual DbSet<Hakkimda> Hakkimdas { get; set; }
         public virtual DbSet<Kategori> Kategoris { get; set; }
         public virtual DbSet<Makale> Makales { get; set; }
         public virtual DbSet<SosyalMedya> SosyalMedyas { get; set; }
@@ -30,6 +32,11 @@ namespace DyBlog.Models
             modelBuilder.Entity<Uye>()
                 .Property(e => e.Sifre)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Uye>()
+                .HasMany(e => e.GeriBildirims)
+                .WithOptional(e => e.Uye)
+                .HasForeignKey(e => e.kul_id);
         }
     }
 }

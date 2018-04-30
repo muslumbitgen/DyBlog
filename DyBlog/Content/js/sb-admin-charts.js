@@ -7,7 +7,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Ocak", "Þubat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Aðustos", "Eylül", "Ekim", "Kasým", "Aralýk"],
+    labels: ["Ocak", "Subat", "Mart", "Nisan", "Mayýs", "Haziran", "Temmuz", "Agustos", "Eylul", "Ekim", "Kasým", "Aralýk"],
     datasets: [{
       label: "Sessions",
       lineTension: 0.3,

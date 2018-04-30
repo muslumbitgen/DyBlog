@@ -26,11 +26,26 @@ namespace DyBlog.Controllers
         }
         public ActionResult KategoriList()
         {
-            return View(db.Kategoris.ToList());
+            var kat = db.Kategoris.ToList();
+            return View(kat);
         }
         public ActionResult SosyalMedya()
         {
-            return View(db.SosyalMedyas.ToList());
+            var sos = db.SosyalMedyas.ToList();
+            return View(sos);
+        }
+        public ActionResult Hakkimda()
+        {
+            var hak = db.Hakkimdas.ToList();
+            return View(hak);
+        }
+        public ActionResult GelenMesaj()
+        {
+            return View(db.GeriBildirims.OrderByDescending(m => m.id).Take(3));
+        }
+        public ActionResult MesajBulten()
+        {
+            return View();
         }
     }
 }

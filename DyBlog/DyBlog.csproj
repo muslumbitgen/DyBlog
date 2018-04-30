@@ -441,9 +441,6 @@
     <Content Include="scripts\tinymce.3.4.5\utils\mctabs.js" />
     <Content Include="scripts\tinymce.3.4.5\utils\validate.js" />
     <Content Include="Web.config" />
-    <Content Include="Views\Home\Hakkimizda.cshtml" />
-    <Content Include="Views\Home\Galeri.cshtml" />
-    <Content Include="Views\Home\Iletisim.cshtml" />
     <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Partials\Kategori.cshtml" />
@@ -454,6 +451,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AdminHakkimdaController.cs" />
     <Compile Include="Controllers\AdminKategoriController.cs" />
     <Compile Include="Controllers\AdminMakaleController.cs" />
     <Compile Include="Controllers\AdminUyeController.cs" />
@@ -468,6 +466,8 @@
     </Compile>
     <Compile Include="Models\DyBlogDB.cs" />
     <Compile Include="Models\Etiket.cs" />
+    <Compile Include="Models\GeriBildirim.cs" />
+    <Compile Include="Models\Hakkimda.cs" />
     <Compile Include="Models\Kategori.cs" />
     <Compile Include="Models\Makale.cs" />
     <Compile Include="Models\SosyalMedya.cs" />
@@ -483,7 +483,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
@@ -518,6 +517,15 @@
     <Content Include="Views\Uye\Login.cshtml" />
     <Content Include="Views\Partials\KategoriList.cshtml" />
     <Content Include="Views\Partials\SosyalMedya.cshtml" />
+    <Content Include="Views\Partials\Hakkimda.cshtml" />
+    <Content Include="Views\AdminHakkimda\Create.cshtml" />
+    <Content Include="Views\AdminHakkimda\Edit.cshtml" />
+    <Content Include="Views\AdminHakkimda\Index.cshtml" />
+    <Content Include="Views\Home\Iletisim.cshtml" />
+    <Content Include="Views\Partials\GelenMesaj.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Admin\GelenMesajList.cshtml" />
+    <Content Include="Views\Admin\GelenTumMesaj.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

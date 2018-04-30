@@ -54,17 +54,10 @@
                 <a href="/">
                     Anasayfa
                 </a>
-                <a href="#">
-                    Makaleler
-                </a>
+               
             </li>
             <li class="menu-item">
-                <a href="#">
-                    Galeri
-                </a>
-            </li>
-            <li class="menu-item">
-                <a href="contact.html">
+                <a href="/Home/iletisim/">
                     İletisim
                 </a>
             </li>
@@ -126,7 +119,7 @@
                 Hakkimda
             </h3>
             <p>
-                13 Temmuz 1995'te Bolu'da doğdum. İlköğretim ve liseyi İstanbul'da tamamladıktan sonra. 2013 yılında Karadeniz Teknik Üniversitesi Of Teknoloji Fakültesi'ne gelerek Yazılım Mühendisliği bölümüne başladım. Şu anda 4. sınıf öğrencisi olduğum bu bölümü en kısa sürede bitirerek iş hayatına atılmayı hedefliyorum :)
+                @{Html.RenderAction("Hakkimda", "Partials");}
             </p>
         </div>
         <!--Hakkimizda Bitis-->

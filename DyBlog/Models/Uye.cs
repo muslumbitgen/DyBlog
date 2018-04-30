@@ -12,6 +12,7 @@ namespace DyBlog.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Uye()
         {
+            GeriBildirims = new HashSet<GeriBildirim>();
             Makales = new HashSet<Makale>();
             Yorums = new HashSet<Yorum>();
         }
@@ -34,6 +35,9 @@ namespace DyBlog.Models
         public string Foto { get; set; }
 
         public int? YetkiId { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GeriBildirim> GeriBildirims { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Makale> Makales { get; set; }

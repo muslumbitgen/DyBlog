@@ -49,21 +49,45 @@ namespace DyBlog.Controllers
             return View(katego);
         }
      
-        public ActionResult Hakkimizda()
-        {
-            return View();
-        }
-        public ActionResult Galeri()
-        {
-            return View();
-        }
+    
         public ActionResult Iletisim()
         {
+            IList<SelectListItem> items = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "Soru", Value = "soru"},
+                new SelectListItem{Text = "İstek", Value = "istek"},
+                new SelectListItem{Text = "Öneri", Value = "oneri"}
+            };
+            ViewBag.konular = new SelectList(items, "Value", "Text");
+
             return View();
+        }
+        [HttpPost]
+        public ActionResult Iletisim(GeriBildirim bildirim)
+        {
+            var uyeid = Session["uyeid"];
+            if (uyeid!=null)
+            {
+                bildirim.Tarih= DateTime.Now;
+                bildirim.kul_id = Convert.ToInt32(uyeid);
+                db.GeriBildirims.Add(bildirim);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+
+
+            }
+            else
+            {
+                TempData["Message"] = Alert("Mesaj Göndermek İçin Giriş Yapmalısınız", false);
+
+            }
+            return View();
+        
         }
         
         public JsonResult YorumYap(string yorum,int makaleId)
         {
+
             var uyeid = Session["uyeid"];
             if (yorum==null)
             {
@@ -97,6 +121,20 @@ namespace DyBlog.Controllers
             makale.Okuma+=1;
             db.SaveChanges();
             return View();
+        }
+        public string Alert(string message, bool? type = null)
+        {
+            string tip;
+            switch (type)
+            {
+                case false: tip = "danger"; break;
+                case true: tip = "success"; break;
+                default:
+                    tip = "info";
+                    break;
+            }
+            string msg = "<div class='alert alert-" + tip + " alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>×</button>" + message + "</div>";
+            return msg;
         }
 
     }

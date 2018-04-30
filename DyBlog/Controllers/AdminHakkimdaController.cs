@@ -7,134 +7,110 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using DyBlog.Models;
-using System.Web.Helpers;
 
 namespace DyBlog.Controllers
 {
-    public class AdminUyeController : Controller
+    public class AdminHakkimdaController : Controller
     {
         private DyBlogDB db = new DyBlogDB();
 
-        // GET: AdminUye
+        // GET: AdminHakkimda
         public ActionResult Index()
         {
-            var uyes = db.Uyes.Include(u => u.Yetki);
-            return View(uyes.OrderByDescending(u=>u.UyeId).ToList());
+            return View(db.Hakkimdas.ToList());
         }
 
-        // GET: AdminUye/Details/5
+        // GET: AdminHakkimda/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Uye uye = db.Uyes.Find(id);
-            if (uye == null)
+            Hakkimda hakkimda = db.Hakkimdas.Find(id);
+            if (hakkimda == null)
             {
                 return HttpNotFound();
             }
-            return View(uye);
+            return View(hakkimda);
         }
 
-        // GET: AdminUye/Create
+        // GET: AdminHakkimda/Create
         public ActionResult Create()
         {
-            ViewBag.YetkiId = new SelectList(db.Yetkis, "YetkiId", "Yetki1");
             return View();
         }
 
-        // POST: AdminUye/Create
+        // POST: AdminHakkimda/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye,string Sifre)
+        public ActionResult Create([Bind(Include = "hak_id,icerik")] Hakkimda hakkimda)
         {
-            var md5pass = Sifre;
             if (ModelState.IsValid)
             {
-                uye.Sifre = Crypto.Hash(md5pass, "MD5");
-                db.Uyes.Add(uye);
+                db.Hakkimdas.Add(hakkimda);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.YetkiId = new SelectList(db.Yetkis, "YetkiId", "Yetki1", uye.YetkiId);
-            return View(uye);
+            return View(hakkimda);
         }
 
-        // GET: AdminUye/Edit/5
+        // GET: AdminHakkimda/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Uye uye = db.Uyes.Find(id);
-            if (uye == null)
+            Hakkimda hakkimda = db.Hakkimdas.Find(id);
+            if (hakkimda == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.YetkiId = new SelectList(db.Yetkis, "YetkiId", "Yetki1", uye.YetkiId);
-            return View(uye);
+            return View(hakkimda);
         }
 
-        // POST: AdminUye/Edit/5
+        // POST: AdminHakkimda/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UyeId,KullaniciAdi,Email,Sifre,AdSoyad,YetkiId")] Uye uye, string Sifre)
+        public ActionResult Edit([Bind(Include = "hak_id,icerik")] Hakkimda hakkimda)
         {
             if (ModelState.IsValid)
             {
-                var md5pass = Sifre;
-                uye.Sifre = Crypto.Hash(md5pass, "MD5");
-                db.Entry(uye).State = EntityState.Modified;
+                db.Entry(hakkimda).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.YetkiId = new SelectList(db.Yetkis, "YetkiId", "Yetki1", uye.YetkiId);
-            return View(uye);
+            return View(hakkimda);
         }
 
-        // GET: AdminUye/Delete/5
+        // GET: AdminHakkimda/Delete/5
         public ActionResult Delete(int id)
         {
-            Uye item = db.Uyes.Where(x => x.UyeId == id).FirstOrDefault();
+            Hakkimda item = db.Hakkimdas.Where(x => x.hak_id == id).FirstOrDefault();
             if (item != null)
             {
                 if (item == null)
                 {
                     return HttpNotFound();
                 }
-                if (System.IO.File.Exists(Server.MapPath(item.Foto)))
-                {
-                    System.IO.File.Delete(Server.MapPath(item.Foto));
-                }
-                foreach (var i in item.Yorums.ToList())
-                {
-                    db.Yorums.Remove(i);
-                }
-                foreach (var i in item.Makales.ToList())
-                {
-                    db.Makales.Remove(i);
-                }
-               
-                db.Uyes.Remove(item);
+                db.Hakkimdas.Remove(item);
                 db.SaveChanges();
-                TempData["Message"] = Alert("Üye silindi", true);
+                TempData["Message"] = Alert("Hakkımızdaki Bilgiler silindi", true);
             }
             else
             {
-                TempData["Message"] = Alert("Hata oluştu! Üye silinemedi.", false);
+                TempData["Message"] = Alert("Hata oluştu! Hakkımızdaki Bilgiler silinemedi.", false);
             }
-            return RedirectToAction("Index", "AdminUye");
+            return RedirectToAction("Index", "AdminHakkimda");
 
 
         }
-
 
         protected override void Dispose(bool disposing)
         {
